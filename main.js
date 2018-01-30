@@ -204,3 +204,124 @@ function ArgumentsSum() {
     return result;
 }
 
+//returns a sum of 2 elements. using Closure
+function sum(a) {
+    return function sum2(b) {
+        return a + b;
+    }
+}
+
+//function make buffer that makes buffer with clear method
+function makeBuffer() {
+    var resultStr = '';
+    
+    function buf(str) {
+        if(arguments.length == 0) return resultStr;
+        resultStr += str;
+    };
+    buf.clear = function () {
+        resultStr = '';
+    }
+    return buf;
+};
+
+//sort in object
+function byField(str) {
+    function sort(a,b) {
+        return a[str] > b[str] ? 1 : -1;
+        
+    }
+    return sort;
+}
+
+//function that filter array using function for filter as argument 
+function filter(arr, func) {
+    var arr2 = [];//create new array for not editing the existing one
+    for (var i = 0; i<arr.length; i++) {
+        var tmp = arr[i];
+        if(func(tmp))//if function returns true
+            arr2.push(tmp);//push arr[i] to new array
+    }
+    return arr2;
+}
+
+//function for filter to filter array between a and b
+function inBetween(a,b) {
+    return function(x)
+    {
+        return x >= a && x <= b;
+    };
+}
+
+//+ and * with 2 variables using this in object
+var calculator = {
+    a : 0,
+    b: 0,
+    read : function() {
+        this.a = prompt('a?',0);
+        this.b = prompt('b?',0);
+    },
+    sum : function() {
+        alert(+this.a + +this.b);
+    },
+    mul : function(a,b ) {
+        alert(+this.a * +this.b);
+}
+};
+
+//function constructor calculator
+function Calculator() {
+    var a = 0;
+    var b = 0;
+    this.read = function() {
+        this.a = +prompt('a?',0);
+        this.b = +prompt('b?',0);
+    };
+    this.sum = function() {
+        return this.a + this.b;
+    };
+    this.mul = function() {
+        return this.a * this.b;
+    };
+}
+var calculator1 = new Calculator();
+
+//function constructor that add an entered value to a
+function Accumulator(a) {
+    this.value = a;
+    this.read = function() {
+        this.b = +prompt('How many will we add?',0);
+        return this.value += this.b;
+    };
+}
+
+var accumulator = new Accumulator(1);
+
+//function constructor that can add math methods and that take as argument string straight like ('1 + 2') and count
+function Calculator2() {
+    var methods = {
+      '-': function(a, b) {
+        return a - b;
+    },
+      '+': function(a, b) {
+          return a + b;
+      }
+    };
+    this.calculate = function(str) {
+    var split = str.split(' ');
+        return methods[split[1]](+split[0],+split[2]);
+    };
+    this.addMethod = function(method,func) {
+        methods[method] = func;
+    };
+}
+var calc = new Calculator2();
+calc.calculate('1 + 2');
+//example of adding method multiply to function constructor Calculator2
+calc.addMethod('*', function(a, b) {
+    return (a * b);
+});
+//example of adding method pow to function constructor Calculator2
+calc.addMethod('^', function(a, b) {
+    return Math.pow(a, b);
+});
