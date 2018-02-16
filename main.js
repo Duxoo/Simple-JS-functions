@@ -325,3 +325,45 @@ calc.addMethod('*', function(a, b) {
 calc.addMethod('^', function(a, b) {
     return Math.pow(a, b);
 });
+
+//function to sum args with using mathod call 
+function sumArgs() {
+    return [].reduce.call(arguments, function (a, b) {
+        return a + b;
+    });
+}
+
+//function that add "live" clock to document format (d.m.y h:m:s)
+function clock() {
+    var day = new Date();
+    var time = day.getDate() + "." + (day.getMonth() + 1) + "." + day.getFullYear() + " " + day.getHours() + ":" + day.getMinutes() + ":" + day.getSeconds();
+    document.getElementById("time").innerHTML = time;
+    window.setTimeout('clock()',1000);
+}
+
+//function for changing pictures when press the button left or right(picture have name 1-8.jpg)
+function change() {
+    var counter = 1;
+    return function (side) {
+        var picture = document.getElementById("Picture");
+        if (side == "left") {
+            if (counter == 1) {
+                counter = 8;
+                picture.src = counter + ".jpg";
+            } else {
+                counter--;
+                picture.src = counter + ".jpg";
+            }
+        }
+        if (side == "right") {
+            if (counter == 8) {
+                counter = 1;
+                picture.src = counter + ".jpg";
+            } else {
+                counter++;
+                picture.src = counter + ".jpg";
+            }
+        }
+    };
+}
+var a = change();
