@@ -2,8 +2,28 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
+//поток это объект,который получает информацию о ресурсе
+var stream = new fs.ReadStream(__filename, {encoding:"UTF-8"});
 
 var ROOT = path.normalize( __dirname + "/public/");
+
+stream.on('readable', function() {
+	var data = stream.read();
+	console.log(data);
+});
+
+stream.on('end', function() {
+	console.log("THE END");
+});
+
+stream.on('error',function(err) {
+	if(err == "ENOENT") {
+		console.log("Файла нет");
+	}
+	else {
+		console.log(err);
+	}
+});
 
 var server = http.createServer(function(req,res) {
 	//если ключевое слово неверно

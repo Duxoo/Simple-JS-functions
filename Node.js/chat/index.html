@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+	<title>Чат</title>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+</head>
+
+<body class="container">
+<p class="lead">Добро пожаловать в чат!</p>
+
+<form id="publish" class="form-inline">
+  <input type="text" name="message"/>
+  <input type="submit" class="btn btn-primary" value="Отправить"/>
+</form>
+
+<ul id="messages"></ul>
+	<script>
+		//при сабмите формы создается XMLHttpRequest и сообщения обычным порядком постятся на сервер
+		publish.onsubmit = function () {
+			//объект XHR дает возможность обращаться к серверу без перезагрузки страниц
+			var xhr = new XMLHttpRequest();
+			//конфигурируем объект: POST-запрос на URL '/publish' true-асинхронно, false-синхронно
+			xhr.open("POST", "/publish", true);
+			//отсылаем запрос. stringify превращает объекты в строку в формате JSON.используется, когда нужно из JS передать данные по сети
+			xhr.send(JSON.stringify({message: this.elements.message.value}));
+			this.elements.message.value = '';
+			return false;
+		};
+		subscribe();
+		//для получения новых сообщений используется алгоритм long-polling
+		function subscribe() {
+			//создается XMR
+			var xhr = new XMLHttpRequest();
+			//конфигурируем объект: GET-метод, URL - '/subscribe'
+			xhr.open("GET", "/subscribe", true);
+			//когда получен ответ с сервера
+			xhr.onload = function() {
+				var li = document.createElement('li');
+				li.textContent = this.responseText;
+				messages.appendChild(li);
+				//заново вызывается функция subscribe т.е делается новый запрос
+				subscribe();
+			};
+		//в случае ошибки
+		xhr.onerror = xhr.onabort = function () {
+			setTimeout(subscribe,500);
+		};
+
+		xhr.send('');
+	}
+	</script>
+</body>
+</html>
