@@ -1,0 +1,27 @@
+{
+  "name": "chat",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bower": "^1.8.4",
+    "config": "^1.30.0",
+    "cookie-parser": "~1.4.3",
+    "crypto": "^1.0.1",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "ejs-locals": "^1.0.2",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "iconf": "0.0.4",
+    "mongodb": "^3.0.10",
+    "mongoose": "^5.1.4",
+    "morgan": "~1.9.0",
+    "nconf": "^0.10.0",
+    "npm": "^6.1.0",
+    "winston": "^2.4.2"
+  },
+  "start": "NODE_PATH=.NODE_ENV=development node app.js"
+}

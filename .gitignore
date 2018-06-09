@@ -1,2 +1,5 @@
 
 Node.js/package-lock.json
+
+Node.js/chat/public/vendor
+*node_modules
