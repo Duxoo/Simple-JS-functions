@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 var mongoose = require('./libs/mongoose');
 //сессии
 var session = require('express-session');
@@ -23,6 +24,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//app.use(bodyParser);
 //для того, чтобы сохранять и загружать сессии нужен класс connect-mongo,
 //к которому будет обращаться middleware session
 const MongoStore = require('connect-mongo')(session);
