@@ -3,5 +3,14 @@
 	"mongoose": {
 		"uri": "mongodb://localhost/chat",
 		"keepAlive": 1
-	}
+	},
+	"session": {
+		"secret": "IloveNodeJS",
+		"key": "sid",
+		"cookie": {
+			"path": "/",
+			"httpOnly": true,
+			"maxAge": null
+		}
+	} 
 }

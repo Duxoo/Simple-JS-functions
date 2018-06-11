@@ -1,8 +1,18 @@
+//криптографический модуль
 var crypto = require('crypto');
-
+/*
+Mongoose – это ORM для MongoDb сделанная под node.js.
+ORM - технология программирования, которая связывает базы данных 
+с концепциями объектно-ориентированных языков программирования, 
+создавая «виртуальную объектную базу данных».
+*/
 var mongoose = require('../libs/mongoose'),
+/*
+В mongoose все завязано на 2х ключевых понятиях 
+Схема(Schema) – описание сущности и Модель – сама сущность.
+*/
 	Schema = mongoose.Schema;
-
+//схема
 var schema = new Schema ({
 	username:{
 		type: String,
@@ -22,7 +32,7 @@ var schema = new Schema ({
 		default: Date.now
 	}
 });
-
+//метод
 schema.methods.encryptPassword = function(password) {
 	return crypto.createHmac('sha1',this.salt).update(password).digest('hex');
 };
@@ -36,9 +46,9 @@ schema.virtual('password')
 	.get(function() {
 		return this._plainPassword;
 	});
-
+//метод
 schema.methods.checkPassword = function(password) {
 	return this.encryptPassword(password) === this.hashedPassword;
 };
-
+//создадим модель по схеме и экспортируем ее
 exports.User = mongoose.model('User', schema);
