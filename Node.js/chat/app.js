@@ -43,9 +43,9 @@ app.use(session({
 	req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
 	res.send("Visits: " + req.session.numberOfVisits);
 })*/
+app.use(require('./middleware/loadUser'));
 //если никакие middleware не сработали, тогда управление передается этому middleware
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

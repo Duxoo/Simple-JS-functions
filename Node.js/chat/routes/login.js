@@ -49,7 +49,7 @@ exports.post = function(req, res, next) {
 			if(err) return next(err);
 			//иначе записываем в сесси id пользователя
 			else {
-				session.user = user.id;
+				req.session.user = user.id;
 				res.send({});
 			}
 		});
