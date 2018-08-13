@@ -13,6 +13,7 @@ var config = require('./config');
 var indexRouter = require('./routes/index');
 //экземпляр объекта экспресса(instance of express)
 var app = express();
+var io  = require('socket.io');
 app.set('port', config.get('port'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,7 +52,9 @@ app.use('/', indexRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+/*io.on('connection', function(socket) {
+	console.log('a user connected');
+});*/
 // error handler if args length == 4 then next() goes to error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

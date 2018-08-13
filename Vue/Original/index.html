@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Vue</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="change">
+<!--cобытия в vue- v-on или @ -->
+	<span @mouseover="changeText">Text</span>
+	<p>{{ title }}</p>
+	<!-- v-bind или просто : -->
+	<p :class="styleCSS"> Цвет: {{ styleCSS }}</p>
+	<input type="text" v-on:input="styleCSS = $event.target.value">
+</div>
+
+<div id="increment">
+	<input type="text" v-on:input="increment($event.target.value)">
+	<p> {{ value }} </p>
+	<p> {{ doubleValue }} </p>
+</div>
+
+<div id="conditionals-list-loops">
+	<!-- v-if- условный оператор vue -->
+	<p v-if="show">Text, that can be invisible</p>
+	<p v-else>Text #2</p>
+	<button v-on:click="show = !show">Скрыть/показать</button>
+	<ul>
+		<li v-for="(car, i) in cars">{{ i+1 }} - {{ car.model }}, скорость: {{ car.speed }} км/ч</li>
+	</ul>
+</div>
+
+<div id="filter">
+	<!-- v-if- условный оператор vue -->
+	<p v-if="show">Text, that can be invisible</p>
+	фильтры применяются с помощью знака |
+	<p v-else> {{ message | lowerCase | capitalize }}</p>
+	<button v-on:click="show = !show">Скрыть/показать</button>
+	<ul>
+		<li v-for="(car, i) in cars">{{ i+1 }} - {{ car.model }}, скорость: {{ car.speed }} км/ч</li>
+	</ul>
+</div>
+
+<div id="component">
+	<app-car></app-car>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.grey {
+	background-color: grey;
+}
+
+.yellow {
+	background-color: yellow;
+}
+
+.pink {
+	background-color: pink;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.car {
+	width: 30%;
+	margin:10px 31%;
+	background: #fafafa;
+	border: 2px solod silver;
+	border-radius: 10px;
+	padding: 1.2% 2%;
+	color: #474747;
+	font-size: 1.1em;
+}
