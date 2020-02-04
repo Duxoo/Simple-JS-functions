@@ -20,6 +20,8 @@
     "http-errors": "~1.6.2",
     "iconf": "0.0.4",
     "mongodb": "^3.0.10",
+    "mongoose": "^5.1.4",
+    "morgan": "~1.9.1",
     "mongoose": "^5.7.5",
     "morgan": "~1.9.0",
     "nconf": "^0.10.0",
